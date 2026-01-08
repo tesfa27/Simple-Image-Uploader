@@ -1,25 +1,69 @@
 @import "tailwindcss";
 
+/* -----------------------------
+  Map Theme Variables for Tailwind
+------------------------------ */
 @theme {
   --color-app-bg: var(--app-bg);
   --color-app-text: var(--app-text);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-border-light: var(--border-light);
+  --color-bg-light: var(--bg-light);
+  --color-text-muted: var(--text-muted);
+  --color-overlay: var(--overlay);
 }
 
-/* Light Variables */
+/* -----------------------------
+  Light Mode Variables
+------------------------------ */
 :root, .light {
-  --app-bg: #ffffff;
-  --app-text: #0f172a;
+  --app-bg: #F9FAFB;           /* Light page background */
+  --app-text: #0f172a;         /* Primary text (dark) */
+  --surface: #FFFFFF;           /* Pure white for cards / surfaces */
+
+  --primary: #3662E3;          /* Brand / Button */
+  --primary-light: #C2DAF9;    /* Primary hover / subtle background */
+  --border-light: #E5E7EB;           /* Borders / dividers */
+  --bg-light: #F9FAFB;         /* Light surfaces / subtle background */
+  --text-muted: #4D5562;       /* Secondary / placeholder text */
+  --overlay: rgba(249,250,251,0.8); /* Light semi-transparent overlay */
 }
 
-/* Dark Variables */
+/* -----------------------------
+  Dark Mode Variables
+------------------------------ */
 .dark {
-  --app-bg: #121826;
-  --app-text: #f8fafc;
+  --app-bg: #121826;           /* Dark page background */
+  --app-text: #f8fafc;         /* Primary text (light) */
+  --surface: #212936;          /* Dark mode card / surface background */
+  
+  --primary: #3662E3;          /* Brand / Button (can stay same) */
+  --primary-light: #C2DAF9;    /* Hover */
+  --border-light: #4D5562;           /* Borders / dividers */
+  --bg-light: #212936;         /* Dark surfaces / subtle background */
+  --text-muted: #E5E7EB;       /* Secondary text in dark mode */
+  --overlay: rgba(33,41,54,0.8); /* Dark semi-transparent overlay */
 }
 
+/* -----------------------------
+  Base Styles with Smooth Transitions
+------------------------------ */
 body {
   background-color: var(--app-bg);
   color: var(--app-text);
-  /* Smooth color transition when toggling */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Optional: Smooth transition for other elements */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+svg .logo-text {
+  fill: var(--app-text);
+  transition: fill 0.3s ease;
+}
+
+
