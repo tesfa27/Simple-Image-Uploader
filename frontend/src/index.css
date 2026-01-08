@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+@theme {
+  --color-app-bg: var(--app-bg);
+  --color-app-text: var(--app-text);
+}
+
+/* Light Variables */
+:root, .light {
+  --app-bg: #ffffff;
+  --app-text: #0f172a;
+}
+
+/* Dark Variables */
+.dark {
+  --app-bg: #121826;
+  --app-text: #f8fafc;
+}
+
+body {
+  background-color: var(--app-bg);
+  color: var(--app-text);
+  /* Smooth color transition when toggling */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
