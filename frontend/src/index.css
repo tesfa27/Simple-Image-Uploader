@@ -17,7 +17,7 @@
   --color-primary-light: var(--primary-light);
   --color-border-light: var(--border-light);
   --color-bg-light: var(--bg-light);
-  --color-text-muted: var(--text-muted);
+  --color-surface-secondary: var(--surface-secondary);
   --color-overlay: var(--overlay);
 }
 
@@ -33,7 +33,7 @@
   --primary-light: #C2DAF9;    /* Primary hover / subtle background */
   --border-light: #E5E7EB;           /* Borders / dividers */
   --bg-light: #F9FAFB;         /* Light surfaces / subtle background */
-  --text-muted: #4D5562;       /* Secondary / placeholder text */
+  --surface-secondary: #E5E7EB;      /* Secondary / placeholder text */
   --overlay: rgba(249,250,251,0.8); /* Light semi-transparent overlay */
 }
 
@@ -49,7 +49,7 @@
   --primary-light: #C2DAF9;    /* Hover */
   --border-light: #4D5562;           /* Borders / dividers */
   --bg-light: #212936;         /* Dark surfaces / subtle background */
-  --text-muted: #E5E7EB;       /* Secondary text in dark mode */
+  --surface-secondary: #4D5562;       /* Secondary text in dark mode */
   --overlay: rgba(33,41,54,0.8); /* Dark semi-transparent overlay */
 }
 
@@ -60,4 +60,22 @@ body {
   background-color: var(--app-bg);
   color: var(--app-text);
  
+}
+
+@keyframes loading {
+  0% {
+    left: -100%;
+  }
+
+  50% {
+    left: 100%;
+  }
+
+  100% {
+    left: -100%;
+  }
+}
+
+.animate-loading {
+  animation: loading 3s linear infinite;
 }
