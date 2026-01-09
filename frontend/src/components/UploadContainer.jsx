@@ -3,19 +3,27 @@ import Uploadimage from "./UploadImage";
 import Loading from "./Loading";
 import UploadedView from "./UploadedView";
 import ImageActions from "./ImageActions";
+import { uploadFile } from "../services/uploadService";
 
 const UploadContainer = () => {
     const [status, setStatus] = useState("idle"); // idle, uploading, success
     const [file, setFile] = useState(null);
+    const [error, setError] = useState(null);
 
     const handleFileSelect = async (selectedFile) => {
     setStatus("uploading");
-    setFile(selectedFile);
-
-    // simulate upload 
-    await new Promise((res) => setTimeout(res, 2000));
-
-    setStatus("success");
+    setError(null);
+    
+    try {
+      const data = await uploadFile(selectedFile); 
+      
+      setFile(data.url); 
+      setStatus("success");
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Please try again.");
+      setStatus("idle");
+    }
   };
 
 
