@@ -1,37 +1,50 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 
-const UploadImage = ( { onFileSelect } ) => {
-  const handleChange = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+const UploadImage = ({ onFileSelect }) => {
+  // Callback triggered when files are dropped or selected
+  const onDrop = useCallback((acceptedFiles) => {
+    if (acceptedFiles.length > 0) {
+      onFileSelect(acceptedFiles[0]);
+    }
+  }, [onFileSelect]);
 
-    onFileSelect(file);
-  };
+  // Hook configuration
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: {
+      'image/jpeg': [],
+      'image/png': [],
+      'image/gif': []
+    },
+    maxSize: 2097152, // 2MB in bytes
+    multiple: false
+  });
+
   return (
     <div
-      className="flex flex-col items-center justify-center gap-4
-        border-2 border-dashed border-border-light 
-        rounded-lg p-32 font-inter"
+      {...getRootProps()}
+      className={`flex flex-col items-center justify-center gap-4
+        border-2 border-dashed rounded-lg p-32 font-inter transition-colors
+        ${isDragActive ? "border-primary" : "border-border-light"}`}
     >
+      {/* Hidden input required by dropzone */}
+      <input {...getInputProps()} />
+
       <img src="./exit.svg" alt="Upload" />
 
       <h1 className="text-main">
-        Drag & drop a file or{" "}
-        <label
-          htmlFor="file-upload"
-          className="text-primary cursor-pointer hover:underline"
-        >
-          browse files
-        </label>
+        {isDragActive ? (
+          "Drop the file here..."
+        ) : (
+          <>
+            Drag & drop a file or{" "}
+            <span className="text-primary cursor-pointer hover:underline">
+              browse files
+            </span>
+          </>
+        )}
       </h1>
-
-      <input
-        id="file-upload"
-        type="file"
-        accept="image/png,image/jpeg,image/gif"
-        onChange={handleChange}
-        className="hidden"
-      />
 
       <p className="text-small font-light">
         JPG, PNG or GIF - Max file size 2MB
