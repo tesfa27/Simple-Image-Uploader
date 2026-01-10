@@ -1,6 +1,21 @@
-import React from 'react'
+import { useState } from 'react';
 
-const ImageActions = () => {
+const ImageActions = ( { imageUrl } ) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = async () => {
+    if (!imageUrl) return;
+
+    try {
+      await navigator.clipboard.writeText(imageUrl);
+      setCopied(true);
+
+      // reset after 2s
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
   return (
     <div className='flex gap-4'>
         <button className='rounded-md bg-primary px-3 py-2 text-small text-white '>
@@ -10,11 +25,13 @@ const ImageActions = () => {
             Download
         </button>
 
-        <button className='rounded-md bg-primary px-3 py-2 text-small text-white '>
+        <button
+         onClick={handleShare}
+         className='rounded-md bg-primary px-3 py-2 text-small text-white '>
             <span>
               <img src='./Link.svg' alt='Share' className="inline-block mr-2 h-4"/>
             </span>
-            Share
+            {copied ? "Copied!" : "Share"}
         </button>
             
     </div>

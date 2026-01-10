@@ -47,7 +47,7 @@ const UploadContainer = () => {
        <UploadedView file={file} />
          </div>
          <div>
-         <ImageActions/>
+         <ImageActions imageUrl={file} />
       </div>
         </div>
        }
