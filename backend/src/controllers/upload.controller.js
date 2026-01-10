@@ -23,10 +23,11 @@ const uploadImage = async (req, res) => {
 };
 
 const downloadImage = (req, res) => {
-  const { filename } = req.params;
+  const filename = decodeURIComponent(req.params.filename);
 
   const url = cloudinary.url(filename, {
     secure: true,
+    flags: "attachment",
   });
 
   res.redirect(url);

@@ -8,7 +8,9 @@ import { uploadFile } from "../services/uploadService";
 const UploadContainer = () => {
     const [status, setStatus] = useState("idle"); // idle, uploading, success
     const [file, setFile] = useState(null);
+    const [fileName, setFileName] = useState(null);
     const [error, setError] = useState(null);
+
 
     const handleFileSelect = async (selectedFile) => {
     setStatus("uploading");
@@ -18,6 +20,7 @@ const UploadContainer = () => {
       const data = await uploadFile(selectedFile); 
       
       setFile(data.url); 
+      setFileName(data.filename);
       setStatus("success");
     } catch (err) {
       console.error(err);
@@ -47,7 +50,7 @@ const UploadContainer = () => {
        <UploadedView file={file} />
          </div>
          <div>
-         <ImageActions imageUrl={file} />
+         <ImageActions imageUrl={file} fileName={fileName} />
       </div>
         </div>
        }

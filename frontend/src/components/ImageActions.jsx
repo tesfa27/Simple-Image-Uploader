@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
-const ImageActions = ( { imageUrl } ) => {
+const ImageActions = ( { imageUrl, fileName } ) => {
   const [copied, setCopied] = useState(false);
+  const downloadUrl = `${import.meta.env.VITE_API_BASE_URL}/download/${encodeURIComponent(fileName)}`;
+
 
   const handleShare = async () => {
     if (!imageUrl) return;
@@ -18,12 +20,14 @@ const ImageActions = ( { imageUrl } ) => {
   };
   return (
     <div className='flex gap-4'>
-        <button className='rounded-md bg-primary px-3 py-2 text-small text-white '>
+        <a
+          href={downloadUrl}
+          className='rounded-md bg-primary px-3 py-2 text-small text-white '>
             <span>
               <img src='./download.svg' alt='Download' className="inline-block mr-2 h-4"/>
             </span>
             Download
-        </button>
+        </a>
 
         <button
          onClick={handleShare}
