@@ -25,7 +25,7 @@ const UploadImage = ({ onFileSelect }) => {
     <div
       {...getRootProps()}
       className={`flex flex-col items-center justify-center gap-4
-        border-2 border-dashed rounded-lg p-32 font-inter transition-colors
+        border-2 border-dashed rounded-lg p-8 md:p-32 text-center font-inter transition-colors
         ${isDragActive ? "border-primary" : "border-border-light"}`}
     >
       {/* Hidden input required by dropzone */}
